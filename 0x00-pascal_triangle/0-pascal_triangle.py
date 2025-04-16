@@ -1,6 +1,6 @@
 def pascal_triangle(n):
     if (n <= 0):
-        return []
+        return [[]]
     tri = [[1]]
     while (n > 1):
         row = []
