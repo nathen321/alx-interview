@@ -1,7 +1,8 @@
 """a simple pascal_triangle program."""
 
+
 def pascal_triangle(n):
-    if (n <= 0):
+    if n <= 0:
         return [[]]
     tri = [[1]]
     while (n > 1):
