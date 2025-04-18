@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """a simple pascal_triangle program."""
 
 
