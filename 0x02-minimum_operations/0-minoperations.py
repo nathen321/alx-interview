@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-"""method that calculates the fewest number 
+"""method that calculates the fewest number
 of operations needed to result in exactly n H
 """
 
+
 def minOperations(n: int) -> int:
-    """The minimum number of operations needed to achieve exactly 
+    """The minimum number of operations needed to achieve exactly
     n 'H's is the sum of the prime factors of n.
     """
     if n <= 1:
@@ -17,3 +18,4 @@ def minOperations(n: int) -> int:
             n = n // divisor
         divisor += 1
     return operations
+    
