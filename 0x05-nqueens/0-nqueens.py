@@ -43,3 +43,6 @@ def main():
     solutions = solve_nqueens(n)
     for solution in solutions:
         print(solution)
+
+if __name__ == "__main__":
+    main()
