@@ -5,31 +5,45 @@
 
 
 def isWinner(x, nums):
-    def is_prime(n):
-        if n <= 1:
-            return False
-        if n == 2:
-            return True
-        if n % 2 == 0:
-            return False
-        for i in range(3, int(n**0.5) + 1, 2):
-            if n % i == 0:
-                return False
-        return True
-
-    def primes_in_range(start, end):
-        return [n for n in range(start, end+1) if is_prime(n)]
-
-    score = []
-    for n in range(x):
-        round_prim = primes_in_range(1, nums[n])
-        score.append(len(round_prim) % 2)
-
-    mari_score = score.count(1)
-    ben_score = score.count(0)
-    if mari_score == ben_score:
+    """ def isWinner(x, nums)
+    """
+    if x == 0 or not nums:
         return None
-    elif mari_score > ben_score:
-        return "Maria"
+
+    max_n = max(nums) if nums else 0
+    if max_n < 2:
+        sieve = [False] * (max_n + 1)
     else:
+        sieve = [True] * (max_n + 1)
+        sieve[0] = sieve[1] = False
+        for current in range(2, int(max_n ** 0.5) + 1):
+            if sieve[current]:
+                for multiple in range(current * current, max_n + 1, current):
+                    sieve[multiple] = False
+
+    prime_counts = [0] * (max_n + 1)
+    count = 0
+    for i in range(1, max_n + 1):
+        if sieve[i]:
+            count += 1
+        prime_counts[i] = count
+
+    maria_wins = 0
+    ben_wins = 0
+
+    for n in nums:
+        primes_up_to_n = prime_counts[n]
+        if primes_up_to_n % 2 == 1:
+            maria_wins += 1
+        else:
+            ben_wins += 1
+
+    if maria_wins > ben_wins:
+        return "Maria"
+    elif ben_wins > maria_wins:
         return "Ben"
+    else:
+        return None
+
+
+print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
