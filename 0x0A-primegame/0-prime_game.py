@@ -5,16 +5,12 @@
 
 
 def isWinner(x, nums):
-    """ def isWinner(x, nums)
-    """
     if x == 0 or not nums:
         return None
 
     max_n = max(nums) if nums else 0
-    if max_n < 2:
-        sieve = [False] * (max_n + 1)
-    else:
-        sieve = [True] * (max_n + 1)
+    sieve = [True] * (max_n + 1) if max_n > 1 else [False, False]
+    if max_n >= 2:
         sieve[0] = sieve[1] = False
         for current in range(2, int(max_n ** 0.5) + 1):
             if sieve[current]:
@@ -33,10 +29,13 @@ def isWinner(x, nums):
 
     for n in nums:
         primes_up_to_n = prime_counts[n]
-        if primes_up_to_n % 2 == 1:
-            maria_wins += 1
-        else:
+        if primes_up_to_n == 0:
             ben_wins += 1
+        else:
+            if primes_up_to_n % 2 == 1:
+                maria_wins += 1
+            else:
+                ben_wins += 1
 
     if maria_wins > ben_wins:
         return "Maria"
@@ -44,6 +43,3 @@ def isWinner(x, nums):
         return "Ben"
     else:
         return None
-
-
-print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
